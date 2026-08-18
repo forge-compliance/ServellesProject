@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Servelle's Guest Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block luxury-brand">
+        <div class="brand-mark">S</div>
+        <div class="brand-name">SERVELLE'S</div>
+        <div class="brand-sub">GUEST SERVICES</div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-nav="home">⌂ <span>Home</span></button>
+        <button class="nav-item" data-nav="new">◫ <span>Requests</span></button>
+        <button class="nav-item" data-nav="orders">▣ <span>Orders</span><span class="nav-badge" id="orderCount">0</span></button>
+        <button class="nav-item" data-nav="conversations">◌ <span>Conversations</span></button>
+        <button class="nav-item" data-nav="guests">♙ <span>Guests</span></button>
+        <button class="nav-item" data-nav="reports">▥ <span>Reports</span></button>
+        <button class="nav-item" data-nav="departments">◇ <span>Departments</span></button>
+        <button class="nav-item" data-nav="team">♧ <span>Team</span></button>
+        <button class="nav-item" data-nav="settings">⚙ <span>Settings</span></button>
+      </nav>
+
+      <div class="hotel-card">
+        <div class="hotel-logo">H</div>
+        <div class="hotel-name">THE HAZELWOOD</div>
+        <div class="hotel-sub">HOTEL & SPA</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Good morning, Sophie</div>
+          <h1>Guest Services</h1>
+          <div class="date-line">Saturday, 15 August · Live operations</div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="manualRequestBtn">＋</button>
+          <button class="icon-btn">◔<span class="badge-dot">4</span></button>
+          <div class="profile">SC</div>
+        </div>
+      </header>
+
+      <section id="homeView" class="view active-view">
+        <div class="hero-grid">
+          <button class="status-card new-card" data-open-view="new">
+            <div class="status-icon">♟</div>
+            <div class="status-title">NEW REQUESTS</div>
+            <div class="status-count" id="newCount">4</div>
+            <div class="status-sub">Awaiting attention</div>
+            <div class="status-arrow">→</div>
+          </button>
+
+          <button class="status-card active-card" data-open-view="active">
+            <div class="status-icon">⟳</div>
+            <div class="status-title">ACTIVE</div>
+            <div class="status-count" id="activeCount">2</div>
+            <div class="status-sub">Currently being handled</div>
+            <div class="status-arrow">→</div>
+          </button>
+
+          <button class="status-card complete-card" data-open-view="completed">
+            <div class="status-icon">✓</div>
+            <div class="status-title">COMPLETED</div>
+            <div class="status-count" id="completedCount">3</div>
+            <div class="status-sub">Completed today</div>
+            <div class="status-arrow">→</div>
+          </button>
+        </div>
+
+        <div class="metrics-row">
+          <div><span>Average response time</span><strong>8m</strong></div>
+          <div><span>SLA target</span><strong>15m</strong></div>
+          <div><span>On duty</span><strong>24</strong></div>
+          <button class="secondary-btn" data-open-view="reports">View reports</button>
+        </div>
+      </section>
+
+      <section id="newView" class="view">
+        <button class="back-dashboard" data-open-view="home">← Back to dashboard</button>
+        <div class="section-head">
+          <div><span class="small-label">REQUEST QUEUE</span><h2>New Requests</h2></div>
+          <div class="section-actions"><button class="secondary-btn" id="filterBtn">Filter</button></div>
+        </div>
+        <div id="newRequestsList" class="request-list"></div>
+      </section>
+
+      <section id="activeView" class="view">
+        <button class="back-dashboard" data-open-view="home">← Back to dashboard</button>
+        <div class="section-head"><div><span class="small-label">LIVE OPERATIONS</span><h2>Active Requests</h2></div></div>
+        <div id="activeRequestsList" class="request-list"></div>
+      </section>
+
+      <section id="ordersView" class="view">
+        <button class="back-dashboard" data-open-view="home">← Back to dashboard</button>
+        <div class="section-head"><div><span class="small-label">FOOD & DRINK</span><h2>Room Service Orders</h2></div><button class="primary-btn" id="newOrderBtn">+ NEW ORDER</button></div>
+        <div class="order-board" id="ordersBoard"></div>
+      </section>
+
+      <section id="departmentsView" class="view">
+        <button class="back-dashboard" data-open-view="home">← Back to dashboard</button>
+        <div class="section-head"><div><span class="small-label">LIVE WORKLOAD</span><h2>Departments</h2></div></div>
+        <div id="departmentGrid" class="department-grid"></div>
+        <div id="departmentRequests" class="request-list" style="margin-top:22px"></div>
+      </section>
+
+      <section id="completedView" class="view">
+        <button class="back-dashboard" data-open-view="home">← Back to dashboard</button>
+        <div class="section-head"><div><span class="small-label">TODAY</span><h2>Completed</h2></div></div>
+        <div id="completedRequestsList" class="request-list"></div>
+      </section>
+
+      <section id="placeholderView" class="view">
+        <div class="placeholder-card">
+          <span class="small-label" id="placeholderEyebrow">SERVELLE'S</span>
+          <h2 id="placeholderTitle">Coming Soon</h2>
+          <p id="placeholderCopy">This module is reserved for the next build stage.</p>
+          <button class="primary-btn" data-open-view="home">Return home</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="drawerOverlay" class="overlay hidden"></div>
+  <aside id="requestDrawer" class="drawer hidden">
+    <div class="drawer-head">
+      <div>
+        <span class="small-label">REQUEST DETAILS</span>
+        <h2 id="drawerTitle">Room 18</h2>
+      </div>
+      <button class="icon-btn" id="closeDrawer">×</button>
+    </div>
+    <div id="drawerContent"></div>
+  </aside>
+
+  <div id="modalOverlay" class="overlay hidden"></div>
+  <div id="modal" class="modal hidden">
+    <div class="modal-head"><h3 id="modalTitle">Transfer to Department</h3><button class="icon-btn" id="closeModal">×</button></div>
+    <div id="modalBody"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
