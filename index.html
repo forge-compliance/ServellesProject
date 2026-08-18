@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="auth.css" />
   <link rel="stylesheet" href="theme-patch.css" />
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
   <section id="authScreen" class="auth-screen">
@@ -23,10 +24,28 @@
       </form>
     </div>
   </section>
+
+  <section id="adminShell" class="admin-shell hidden">
+    <header class="admin-topbar">
+      <div class="admin-brand"><div class="admin-brand-mark">S</div><div><div class="admin-kicker">Servelle's platform</div><div class="admin-title">Hotel Administration</div></div></div>
+      <div class="admin-actions"><span id="adminUser" class="admin-user"></span><button id="adminLogoutBtn" class="secondary-btn">Sign out</button></div>
+    </header>
+    <div class="admin-summary">
+      <div class="admin-stat"><span>Hotels</span><strong id="adminHotelCount">0</strong></div>
+      <div class="admin-stat"><span>Hotel users</span><strong id="adminUserCount">0</strong></div>
+      <div class="admin-stat"><span>Departments</span><strong id="adminDeptCount">0</strong></div>
+      <div class="admin-stat"><span>Rooms</span><strong id="adminRoomCount">0</strong></div>
+    </div>
+    <section class="admin-panel">
+      <div class="admin-panel-head"><div><span class="small-label">SERVELLE'S NETWORK</span><h2>Hotels</h2></div><button class="primary-btn" onclick="alert('New hotel onboarding is the next admin build step.')">+ ADD HOTEL</button></div>
+      <div id="adminHotelGrid" class="hotel-admin-grid"></div>
+    </section>
+  </section>
+
   <div class="app-shell auth-locked">
     <aside class="sidebar"><div class="brand-block luxury-brand"><div class="brand-mark">S</div><div class="brand-name">SERVELLE'S</div><div class="brand-sub">GUEST SERVICES</div></div>
       <nav class="nav-list"><button class="nav-item active" data-nav="home">⌂ <span>Home</span></button><button class="nav-item" data-nav="new">◫ <span>Requests</span></button><button class="nav-item" data-nav="orders">▣ <span>Orders</span><span class="nav-badge" id="orderCount">0</span></button><button class="nav-item" data-nav="conversations">◌ <span>Conversations</span></button><button class="nav-item" data-nav="guests">♙ <span>Guests</span></button><button class="nav-item" data-nav="reports">▥ <span>Reports</span></button><button class="nav-item" data-nav="departments">◇ <span>Departments</span></button><button class="nav-item" data-nav="team">♧ <span>Team</span></button><button class="nav-item" data-nav="settings">⚙ <span>Settings</span></button></nav>
-      <div class="hotel-card"><div class="hotel-logo">S</div><div class="hotel-name">SERVELLE'S</div><div class="hotel-sub">SIGNED IN HOTEL</div><button id="logoutBtn" class="logout-btn">Sign out</button></div></aside>
+      <div class="hotel-card"><div class="hotel-logo">S</div><div class="hotel-name">SERVELLE'S</div><div class="hotel-sub">SIGNED IN HOTEL</div><button id="returnAdminBtn" class="logout-btn hidden">← All hotels</button><button id="logoutBtn" class="logout-btn">Sign out</button></div></aside>
     <main class="main"><header class="topbar"><div><div class="eyebrow">Welcome</div><h1>Guest Services</h1><div class="date-line">Live operations</div></div><div class="top-actions"><button class="icon-btn" id="manualRequestBtn">＋</button><button class="icon-btn">◔<span class="badge-dot">4</span></button><div class="profile servelles-profile-mark">S</div></div></header>
       <section id="homeView" class="view active-view"><div class="hero-grid"><button class="status-card new-card" data-open-view="new"><div class="status-icon">♟</div><div class="status-title">NEW REQUESTS</div><div class="status-count" id="newCount">4</div><div class="status-sub">Awaiting attention</div><div class="status-arrow">→</div></button><button class="status-card active-card" data-open-view="active"><div class="status-icon">⟳</div><div class="status-title">ACTIVE</div><div class="status-count" id="activeCount">2</div><div class="status-sub">Currently being handled</div><div class="status-arrow">→</div></button><button class="status-card complete-card" data-open-view="completed"><div class="status-icon">✓</div><div class="status-title">COMPLETED</div><div class="status-count" id="completedCount">3</div><div class="status-sub">Completed today</div><div class="status-arrow">→</div></button></div><div class="metrics-row"><div><span>Average response time</span><strong>8m</strong></div><div><span>SLA target</span><strong>15m</strong></div><div><span>On duty</span><strong>24</strong></div><button class="secondary-btn" data-open-view="reports">View reports</button></div></section>
       <section id="newView" class="view"><button class="back-dashboard" data-open-view="home">← Back to dashboard</button><div class="section-head"><div><span class="small-label">REQUEST QUEUE</span><h2>New Requests</h2></div><div class="section-actions"><button class="secondary-btn" id="filterBtn">Filter</button></div></div><div id="newRequestsList" class="request-list"></div></section>
@@ -38,5 +57,5 @@
     </main>
   </div>
   <div id="drawerOverlay" class="overlay hidden"></div><aside id="requestDrawer" class="drawer hidden"><div class="drawer-head"><div><span class="small-label">REQUEST DETAILS</span><h2 id="drawerTitle">Room</h2></div><button class="icon-btn" id="closeDrawer">×</button></div><div id="drawerContent"></div></aside><div id="modalOverlay" class="overlay hidden"></div><div id="modal" class="modal hidden"><div class="modal-head"><h3 id="modalTitle">Transfer to Department</h3><button class="icon-btn" id="closeModal">×</button></div><div id="modalBody"></div></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="app.js"></script><script src="auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="app.js"></script><script src="admin.js"></script><script src="auth.js"></script>
 </body></html>
