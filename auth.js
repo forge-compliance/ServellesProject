@@ -23,31 +23,17 @@ function initials(name) {
 }
 
 function forceAdminLogo(){
-  const brand=document.querySelector('#adminShell .admin-brand');
-  if(!brand) return;
+  const shell=document.getElementById('adminShell');
+  if(!shell) return;
   let img=document.getElementById('servellesAdminLogoImg');
   if(!img){
     img=document.createElement('img');
     img.id='servellesAdminLogoImg';
     img.alt="Servelle's Guest Services";
-    img.src='servelles-logo.png?v=082';
-    brand.innerHTML='';
-    brand.appendChild(img);
+    img.src='servelles-logo.png?v=083';
+    shell.appendChild(img);
   }
-  brand.style.setProperty('display','flex','important');
-  brand.style.setProperty('align-items','center','important');
-  brand.style.setProperty('justify-content','center','important');
-  brand.style.setProperty('padding','12px 18px','important');
-  brand.style.setProperty('height','165px','important');
-  brand.style.setProperty('min-height','165px','important');
-  brand.style.setProperty('background','none','important');
-  img.style.setProperty('display','block','important');
-  img.style.setProperty('width','210px','important');
-  img.style.setProperty('height','auto','important');
-  img.style.setProperty('max-height','145px','important');
-  img.style.setProperty('object-fit','contain','important');
-  img.style.setProperty('opacity','1','important');
-  img.style.setProperty('visibility','visible','important');
+  img.style.cssText='position:fixed!important;left:20px!important;top:14px!important;width:215px!important;height:135px!important;object-fit:contain!important;display:block!important;visibility:visible!important;opacity:1!important;z-index:99999!important;pointer-events:none!important;background:transparent!important;';
 }
 
 async function loadServellesContext(user) {
@@ -62,6 +48,7 @@ async function loadServellesContext(user) {
     await loadAdminDashboard();
     forceAdminLogo();
     setTimeout(forceAdminLogo,100);
+    setTimeout(forceAdminLogo,500);
     return;
   }
 
