@@ -22,6 +22,34 @@ function initials(name) {
   return (name || 'S').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 }
 
+function forceAdminLogo(){
+  const brand=document.querySelector('#adminShell .admin-brand');
+  if(!brand) return;
+  let img=document.getElementById('servellesAdminLogoImg');
+  if(!img){
+    img=document.createElement('img');
+    img.id='servellesAdminLogoImg';
+    img.alt="Servelle's Guest Services";
+    img.src='servelles-logo.png?v=082';
+    brand.innerHTML='';
+    brand.appendChild(img);
+  }
+  brand.style.setProperty('display','flex','important');
+  brand.style.setProperty('align-items','center','important');
+  brand.style.setProperty('justify-content','center','important');
+  brand.style.setProperty('padding','12px 18px','important');
+  brand.style.setProperty('height','165px','important');
+  brand.style.setProperty('min-height','165px','important');
+  brand.style.setProperty('background','none','important');
+  img.style.setProperty('display','block','important');
+  img.style.setProperty('width','210px','important');
+  img.style.setProperty('height','auto','important');
+  img.style.setProperty('max-height','145px','important');
+  img.style.setProperty('object-fit','contain','important');
+  img.style.setProperty('opacity','1','important');
+  img.style.setProperty('visibility','visible','important');
+}
+
 async function loadServellesContext(user) {
   const { data: profile } = await servellesDb.from('profiles').select('full_name').eq('id', user.id).maybeSingle();
   SERVELLES_USER = { ...user, full_name: profile?.full_name || user.user_metadata?.full_name || user.email };
@@ -32,6 +60,8 @@ async function loadServellesContext(user) {
     SERVELLES_MEMBERSHIP = { role: 'servelles_admin' };
     authScreen?.classList.add('hidden');
     await loadAdminDashboard();
+    forceAdminLogo();
+    setTimeout(forceAdminLogo,100);
     return;
   }
 
