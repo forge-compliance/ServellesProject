@@ -59,9 +59,9 @@ async function loadServellesContext(user) {
 
   if (hotelName) hotelName.textContent = SERVELLES_HOTEL.name.toUpperCase();
   if (hotelSub) hotelSub.textContent = membership.role.replaceAll('_',' ').toUpperCase();
-  if (hotelLogo) hotelLogo.textContent = initials(SERVELLES_HOTEL.short_name || SERVELLES_HOTEL.name).slice(0,1);
+  if (hotelLogo) hotelLogo.textContent = '';
   if (eyebrow) eyebrow.textContent = `Welcome, ${SERVELLES_USER.full_name}`;
-  if (profileBubble) profileBubble.textContent = 'S';
+  if (profileBubble) profileBubble.textContent = '';
   if (returnAdminBtn) returnAdminBtn.classList.add('hidden');
 
   document.getElementById('adminShell')?.classList.add('hidden');
@@ -113,3 +113,32 @@ servellesDb.auth.onAuthStateChange(async (event, session) => {
     catch (err) { setLoginMessage(err.message, true); await showSignedOut(); }
   } else await showSignedOut();
 })();
+
+/* Navigation recovery layer: keeps sidebar links working independently of prototype handlers. */
+function servellesOpenView(name){
+  const direct = ['home','new','active','orders','departments','completed'];
+  const target = direct.includes(name) ? name : 'placeholder';
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active-view'));
+  document.getElementById(target+'View')?.classList.add('active-view');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.nav===name));
+  if(target==='placeholder'){
+    const titles={conversations:'Conversations',guests:'Guest Directory',reports:'Reports & Service Levels',team:'Team',settings:'Settings'};
+    const title=document.getElementById('placeholderTitle');
+    const copy=document.getElementById('placeholderCopy');
+    if(title) title.textContent=titles[name]||'Coming Soon';
+    if(copy) copy.textContent='Reserved for the connected-data build. The operational request, department and room-service flows are live in this prototype.';
+  }
+  try{
+    if(['new','active','completed'].includes(name) && typeof renderLists==='function') renderLists();
+    if(name==='orders' && typeof renderOrders==='function') renderOrders();
+    if(name==='departments' && typeof renderDepartments==='function') renderDepartments();
+  }catch(e){ console.warn('Servelles view render warning',e); }
+}
+
+document.addEventListener('click',event=>{
+  const button=event.target.closest('.nav-item');
+  if(!button || !document.querySelector('.app-shell')?.contains(button)) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  servellesOpenView(button.dataset.nav||'home');
+},true);
