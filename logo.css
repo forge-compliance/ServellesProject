@@ -1,10 +1,10 @@
 /* Approved Servelle's logo only - one master asset */
 .auth-brand-mark,.admin-brand-mark,.brand-block .brand-mark,.hotel-logo,.profile.servelles-profile-mark{font-size:0!important;color:transparent!important;background:none!important}
 .auth-brand-name,.auth-brand-sub,.admin-brand-mark,.admin-brand>div:last-child,.brand-block .brand-mark,.brand-block .brand-name,.brand-block .brand-sub,.brand-block>div{display:none!important}
-.auth-brand-mark::before,.brand-block::before,.hotel-logo::before,.profile.servelles-profile-mark::before{content:""!important;display:block!important;background:url('./servelles-logo.png?v=085') center/contain no-repeat!important;width:100%!important;height:100%!important}
+.auth-brand-mark::before,.brand-block::before,.hotel-logo::before,.profile.servelles-profile-mark::before{content:""!important;display:block!important;background:url('./servelles-logo.png?v=086') center/contain no-repeat!important;width:100%!important;height:100%!important}
 .auth-brand-mark{display:block!important;width:260px!important;height:175px!important;margin:0 auto 4px!important}
-.admin-brand{display:none!important}
-/* Admin logo is rendered once by the sidebar brand block. Do not add fixed/pseudo logo overlays here. */
+/* Admin sidebar branding is owned by admin.js. Do not create another admin logo here. */
+.admin-brand{display:block!important}
 .brand-block{display:block!important;box-sizing:border-box!important;width:100%!important;height:150px!important;padding:10px 18px 0!important;margin:0 0 18px!important;background:none!important}
 .brand-block::before{width:100%!important;height:125px!important}
 .hotel-logo{display:block!important;width:150px!important;height:72px!important;margin:0 auto 8px!important}
