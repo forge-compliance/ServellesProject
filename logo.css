@@ -1,12 +1,12 @@
-/* Approved Servelle's logo only */
-.auth-brand-mark,.admin-brand-mark,.brand-block .brand-mark,.hotel-logo,.profile.servelles-profile-mark{font-size:0!important;color:transparent!important;background-image:url('servelles-logo.png')!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}
+/* Approved Servelle's logo only - one master asset */
+.auth-brand-mark,.admin-brand-mark,.brand-block .brand-mark,.hotel-logo,.profile.servelles-profile-mark{font-size:0!important;color:transparent!important;background-image:url('./servelles-logo.png?v=080')!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}
 .auth-brand-mark::before,.admin-brand-mark::before{content:none!important;display:none!important}
-.auth-brand-mark{width:260px!important;height:175px!important;margin:0 auto 4px!important}
+.auth-brand-mark{display:block!important;width:260px!important;height:175px!important;margin:0 auto 4px!important}
 .auth-brand-name,.auth-brand-sub{display:none!important}
-.admin-brand{background:url('servelles-logo.png') center 22px/205px auto no-repeat!important;min-height:175px!important;padding-top:150px!important}
+.admin-brand{display:block!important;box-sizing:border-box!important;width:255px!important;height:165px!important;min-height:165px!important;padding:0!important;background-image:url('./servelles-logo.png?v=080')!important;background-repeat:no-repeat!important;background-position:center 12px!important;background-size:220px auto!important}
 .admin-brand-mark,.admin-brand>div:last-child{display:none!important}
-.brand-block{display:block!important;height:185px!important;padding:0!important;margin:0 0 18px!important;background:url('servelles-logo.png') center 14px/190px auto no-repeat!important}
+.brand-block{display:block!important;box-sizing:border-box!important;width:100%!important;height:170px!important;padding:0!important;margin:0 0 18px!important;background-image:url('./servelles-logo.png?v=080')!important;background-repeat:no-repeat!important;background-position:center 8px!important;background-size:210px auto!important}
 .brand-block .brand-mark,.brand-block .brand-name,.brand-block .brand-sub,.brand-block>div{display:none!important}
-.hotel-logo{width:150px!important;height:72px!important;margin:0 auto 8px!important;background-size:145px auto!important}
-.profile.servelles-profile-mark{background-size:88% auto!important}
-@media(max-width:560px){.auth-brand-mark{width:210px!important;height:142px!important}.brand-block{height:150px!important;background-size:160px auto!important}}
+.hotel-logo{display:block!important;width:150px!important;height:72px!important;margin:0 auto 8px!important;background-size:145px auto!important}
+.profile.servelles-profile-mark{display:block!important;background-size:88% auto!important}
+@media(max-width:560px){.auth-brand-mark{width:210px!important;height:142px!important}.brand-block{height:145px!important;background-size:175px auto!important}}
