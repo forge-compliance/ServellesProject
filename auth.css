@@ -1,0 +1,11 @@
+.auth-locked{display:none!important}
+.auth-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(rgba(5,8,12,.66),rgba(5,8,12,.82)),url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=80') center/cover fixed}
+.auth-card{width:min(430px,94vw);padding:42px;background:rgba(9,16,23,.96);border:1px solid rgba(201,147,61,.35);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.55);text-align:center}
+.auth-brand-mark{font-family:"Cormorant Garamond",serif;font-size:64px;line-height:1;color:var(--gold2)}
+.auth-brand-name{font-family:"Cormorant Garamond",serif;font-size:24px;letter-spacing:.18em;color:var(--gold2)}
+.auth-brand-sub{margin-top:5px;font-size:10px;letter-spacing:.22em;color:#d7bd87}
+.auth-card h2{font-size:38px;margin-top:30px}.auth-card>p{color:var(--muted);margin:8px 0 24px}
+.login-form{display:grid;gap:16px;text-align:left}.login-form label{font-size:12px;color:#c9cfd4}.login-form input{width:100%;margin-top:7px;padding:13px 14px;border-radius:10px;border:1px solid var(--line);background:#111b24;color:white;outline:none}.login-form input:focus{border-color:var(--gold)}
+.login-form .primary-btn{width:100%;margin-top:4px}.login-form button:disabled{opacity:.6;cursor:wait}.login-message{min-height:20px;text-align:center;font-size:12px;color:#c9cfd4}.login-message.auth-error{color:#ffb8b8}
+.logout-btn{margin-top:14px;border:1px solid var(--line);background:transparent;color:#aeb6bd;border-radius:8px;padding:7px 10px;font-size:11px}.logout-btn:hover{border-color:var(--gold);color:white}
+@media(max-width:560px){.auth-card{padding:30px 22px}}
