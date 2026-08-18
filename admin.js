@@ -1,9 +1,9 @@
 let SERVELLES_ADMIN_MODE = false;
 
-async function isPlatformAdmin(userId){
-  const { data, error } = await servellesDb.from('servelles_admins').select('user_id,active').eq('user_id',userId).eq('active',true).maybeSingle();
+async function isPlatformAdmin(){
+  const { data, error } = await servellesDb.rpc('is_servelles_admin');
   if(error) throw error;
-  return !!data;
+  return data === true;
 }
 
 async function loadAdminDashboard(){
