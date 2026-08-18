@@ -1,0 +1,18 @@
+/* Servelles visual alignment with original demo */
+.main{
+  background:
+    linear-gradient(rgba(5,8,12,.48),rgba(5,8,12,.64)),
+    url('https://raw.githubusercontent.com/forge-compliance/Servelles/main/Backgroundimage.png')
+    center/cover fixed !important;
+}
+
+.profile.servelles-profile-mark{
+  font-family:"Cormorant Garamond",serif;
+  font-size:32px;
+  font-weight:600;
+  line-height:1;
+  color:var(--gold2);
+  background:linear-gradient(145deg,#101820,#071019);
+  border:1px solid rgba(224,180,96,.65);
+  box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 0 18px rgba(201,147,61,.08);
+}
