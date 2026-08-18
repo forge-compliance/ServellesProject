@@ -22,20 +22,6 @@ function initials(name) {
   return (name || 'S').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 }
 
-function forceAdminLogo(){
-  const shell=document.getElementById('adminShell');
-  if(!shell) return;
-  let img=document.getElementById('servellesAdminLogoImg');
-  if(!img){
-    img=document.createElement('img');
-    img.id='servellesAdminLogoImg';
-    img.alt="Servelle's Guest Services";
-    img.src='servelles-logo.png?v=083';
-    shell.appendChild(img);
-  }
-  img.style.cssText='position:fixed!important;left:20px!important;top:14px!important;width:215px!important;height:135px!important;object-fit:contain!important;display:block!important;visibility:visible!important;opacity:1!important;z-index:99999!important;pointer-events:none!important;background:transparent!important;';
-}
-
 async function loadServellesContext(user) {
   const { data: profile } = await servellesDb.from('profiles').select('full_name').eq('id', user.id).maybeSingle();
   SERVELLES_USER = { ...user, full_name: profile?.full_name || user.user_metadata?.full_name || user.email };
@@ -46,9 +32,6 @@ async function loadServellesContext(user) {
     SERVELLES_MEMBERSHIP = { role: 'servelles_admin' };
     authScreen?.classList.add('hidden');
     await loadAdminDashboard();
-    forceAdminLogo();
-    setTimeout(forceAdminLogo,100);
-    setTimeout(forceAdminLogo,500);
     return;
   }
 
