@@ -1,5 +1,5 @@
 /* Approved Servelle's logo only */
-.auth-brand-mark,.admin-brand-mark,.brand-block .brand-mark{font-size:0!important;color:transparent!important;background:url('servelles-logo.svg') center/contain no-repeat!important}
+.auth-brand-mark,.admin-brand-mark,.brand-block .brand-mark{font-size:0!important;color:transparent!important;background:url('servelles-logo.png') center/contain no-repeat!important}
 .auth-brand-mark::before,.admin-brand-mark::before{content:none!important;display:none!important}
 .auth-brand-mark{width:210px!important;height:140px!important;margin:0 auto!important}
 .auth-brand-name,.auth-brand-sub{display:none!important}
@@ -8,5 +8,5 @@
 .brand-block{display:flex!important;justify-content:center!important;align-items:center!important;padding-top:8px!important}
 .brand-block .brand-mark{width:180px!important;height:120px!important;flex:none!important}
 .brand-block .brand-name,.brand-block .brand-sub{display:none!important}
-.profile.servelles-profile-mark{font-size:0!important;background-image:url('servelles-logo.svg')!important;background-repeat:no-repeat!important;background-position:center!important;background-size:92% auto!important}
+.profile.servelles-profile-mark{font-size:0!important;background-image:url('servelles-logo.png')!important;background-repeat:no-repeat!important;background-position:center!important;background-size:92% auto!important}
 @media(max-width:560px){.auth-brand-mark{width:180px!important;height:120px!important}}
