@@ -17,7 +17,8 @@
       .platform-hotel-list{display:grid;gap:10px}
       .platform-hotel-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
       .platform-hotel-row:last-child{border-bottom:0}
-      .platform-hotel-row strong{display:block;font-size:15px}.platform-hotel-row small{color:var(--muted)}
+      .platform-hotel-row strong{display:block;font-size:15px}
+      .platform-hotel-row small{color:var(--muted)}
       .platform-quick-actions{display:grid;gap:10px}
       .platform-quick-actions button{width:100%;margin:0;text-align:left}
       .admin-hotels-only .admin-summary{display:none!important}
@@ -31,19 +32,15 @@
   }
 
   function activateNav(page){
-    const nav=document.getElementById('servellesAdminNav');
-    nav?.querySelectorAll('button[data-admin-page]').forEach(b=>b.classList.toggle('active',b.dataset.adminPage===page));
+    document.getElementById('servellesAdminNav')?.querySelectorAll('button[data-admin-page]').forEach(b=>b.classList.toggle('active',b.dataset.adminPage===page));
   }
-
-  function hidePlaceholder(){
-    document.getElementById('adminPlaceholderPanel')?.style.setProperty('display','none');
+  function hideUsers(){ document.getElementById('adminUsersPanel')?.style.setProperty('display','none'); }
+  function hidePlaceholder(){ document.getElementById('adminPlaceholderPanel')?.style.setProperty('display','none'); }
+  function hideDashboard(){ document.getElementById('platformDashboardPanel')?.style.setProperty('display','none'); }
+  function originalHotelsPanel(){
+    return document.querySelector('#adminOverview .admin-panel:not(#adminPlaceholderPanel):not(#adminUsersPanel):not(#platformDashboardPanel)');
   }
-
-  async function freshData(){
-    if(typeof loadAdminData==='function') await loadAdminData();
-  }
-
-  function adminUserTotal(){ return (window.ADMIN_MEMBERSHIPS||ADMIN_MEMBERSHIPS||[]).filter(x=>x.active).length; }
+  async function freshData(){ if(typeof loadAdminData==='function') await loadAdminData(); }
 
   async function showDashboard(){
     ensureStyles();
@@ -54,10 +51,11 @@
     if(!overview) return;
     manager?.classList.add('hidden');
     overview.classList.remove('hidden','admin-hotels-only');
+    hideUsers();
     hidePlaceholder();
 
     const summary=overview.querySelector('.admin-summary');
-    const hotelsPanel=overview.querySelector('.admin-panel:not(#adminPlaceholderPanel):not(#platformDashboardPanel)');
+    const hotelsPanel=originalHotelsPanel();
     if(summary) summary.style.display='none';
     if(hotelsPanel) hotelsPanel.style.display='none';
 
@@ -105,10 +103,11 @@
     manager?.classList.add('hidden');
     overview.classList.remove('hidden');
     overview.classList.add('admin-hotels-only');
+    hideUsers();
     hidePlaceholder();
-    document.getElementById('platformDashboardPanel')?.style.setProperty('display','none');
+    hideDashboard();
     const summary=overview.querySelector('.admin-summary'); if(summary) summary.style.display='none';
-    const panel=overview.querySelector('.admin-panel:not(#adminPlaceholderPanel):not(#platformDashboardPanel)');
+    const panel=originalHotelsPanel();
     if(panel) panel.style.display='block';
     const head=panel?.querySelector('.admin-panel-head h2'); if(head) head.textContent='Hotels';
     const grid=document.getElementById('adminHotelGrid');
@@ -124,8 +123,11 @@
     nav.addEventListener('click',e=>{
       const b=e.target.closest('button[data-admin-page]'); if(!b) return;
       const page=b.dataset.adminPage;
+      if(page!=='users') hideUsers();
+      if(page!=='dashboard') hideDashboard();
       if(page!=='dashboard'&&page!=='hotels') return;
-      e.preventDefault();e.stopImmediatePropagation();
+      e.preventDefault();
+      e.stopImmediatePropagation();
       if(page==='dashboard') showDashboard(); else showHotels();
     },true);
     return true;
