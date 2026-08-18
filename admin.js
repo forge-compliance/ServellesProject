@@ -41,6 +41,7 @@ async function loadAdminDashboard(){
     </article>`;
   }).join('') || '<div class="admin-empty">No hotels have been created yet.</div>';
 
+  document.getElementById('returnAdminBtn')?.classList.add('hidden');
   authScreen?.classList.add('hidden');
   appShell?.classList.add('auth-locked');
   adminShell?.classList.remove('hidden');
@@ -59,11 +60,13 @@ async function enterHotelAsAdmin(hotelId){
   if(hotelSub) hotelSub.textContent = 'SERVELLES ADMIN ACCESS';
   if(hotelLogo) hotelLogo.textContent = 'S';
   if(eyebrow) eyebrow.textContent = `Admin view · ${hotel.name}`;
+  document.getElementById('returnAdminBtn')?.classList.remove('hidden');
   document.getElementById('adminShell')?.classList.add('hidden');
   document.querySelector('.app-shell')?.classList.remove('auth-locked');
 }
 
 function returnToAdmin(){
+  document.getElementById('returnAdminBtn')?.classList.add('hidden');
   document.querySelector('.app-shell')?.classList.add('auth-locked');
   loadAdminDashboard();
 }
