@@ -24,6 +24,18 @@ function initials(name) {
 
 async function loadServellesContext(user) {
   const { data: profile } = await servellesDb.from('profiles').select('full_name').eq('id', user.id).maybeSingle();
+  SERVELLES_USER = { ...user, full_name: profile?.full_name || user.user_metadata?.full_name || user.email };
+
+  if (typeof isPlatformAdmin === 'function' && await isPlatformAdmin(user.id)) {
+    SERVELLES_ADMIN_MODE = true;
+    SERVELLES_HOTEL = null;
+    SERVELLES_MEMBERSHIP = { role: 'servelles_admin' };
+    authScreen?.classList.add('hidden');
+    await loadAdminDashboard();
+    return;
+  }
+
+  SERVELLES_ADMIN_MODE = false;
   const { data: membership, error: membershipError } = await servellesDb
     .from('hotel_memberships')
     .select('id,hotel_id,role,active,hotels(id,name,short_name,slug,active)')
@@ -35,7 +47,6 @@ async function loadServellesContext(user) {
   if (membershipError) throw membershipError;
   if (!membership || !membership.hotels) throw new Error('Your account is not assigned to a hotel yet.');
 
-  SERVELLES_USER = { ...user, full_name: profile?.full_name || user.user_metadata?.full_name || user.email };
   SERVELLES_MEMBERSHIP = membership;
   SERVELLES_HOTEL = membership.hotels;
 
@@ -44,19 +55,24 @@ async function loadServellesContext(user) {
   const hotelLogo = document.querySelector('.hotel-logo');
   const eyebrow = document.querySelector('.topbar .eyebrow');
   const profileBubble = document.querySelector('.profile');
+  const returnAdminBtn = document.getElementById('returnAdminBtn');
 
   if (hotelName) hotelName.textContent = SERVELLES_HOTEL.name.toUpperCase();
   if (hotelSub) hotelSub.textContent = membership.role.replaceAll('_',' ').toUpperCase();
   if (hotelLogo) hotelLogo.textContent = initials(SERVELLES_HOTEL.short_name || SERVELLES_HOTEL.name).slice(0,1);
   if (eyebrow) eyebrow.textContent = `Welcome, ${SERVELLES_USER.full_name}`;
-  if (profileBubble) profileBubble.textContent = initials(SERVELLES_USER.full_name);
+  if (profileBubble) profileBubble.textContent = 'S';
+  if (returnAdminBtn) returnAdminBtn.classList.add('hidden');
 
+  document.getElementById('adminShell')?.classList.add('hidden');
   authScreen?.classList.add('hidden');
   appShell?.classList.remove('auth-locked');
 }
 
 async function showSignedOut() {
   SERVELLES_USER = SERVELLES_HOTEL = SERVELLES_MEMBERSHIP = null;
+  SERVELLES_ADMIN_MODE = false;
+  document.getElementById('adminShell')?.classList.add('hidden');
   appShell?.classList.add('auth-locked');
   authScreen?.classList.remove('hidden');
 }
