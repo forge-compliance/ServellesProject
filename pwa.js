@@ -1,5 +1,9 @@
 /* Servelle's installable web app */
 (function(){
+ const adminMobile=document.createElement('link');
+ adminMobile.rel='stylesheet';
+ adminMobile.href='admin-mobile.css?v=001';
+ document.head.appendChild(adminMobile);
  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Servelles service worker',err)))}
  let deferred=null;
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;document.documentElement.classList.add('servelles-installable')});
