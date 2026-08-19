@@ -25,10 +25,14 @@
    if(!btn){
      btn=document.createElement('button');
      btn.id='mobileLogoutBtn';
-     btn.className='nav-item mobile-logout-item';
+     btn.className='mobile-logout-item';
      btn.type='button';
      btn.innerHTML='⇥ <span>Sign out</span>';
-     btn.addEventListener('click',()=>realLogout.click());
+     btn.addEventListener('click',async event=>{
+       event.preventDefault();
+       event.stopPropagation();
+       realLogout.click();
+     });
      nav.appendChild(btn);
    }
  }
@@ -37,7 +41,7 @@
  new MutationObserver(tidyMobileNav).observe(document.documentElement,{childList:true,subtree:true});
 
  const extra=document.createElement('style');
- extra.textContent=`@media(max-width:700px){.sidebar{display:flex!important;flex-direction:column!important}.nav-list{flex:1 1 auto!important;overflow-y:auto!important;min-height:0!important}.mobile-logout-item{position:sticky!important;bottom:0!important;margin-top:auto!important;background:#111820!important;border:1px solid rgba(216,162,62,.38)!important;color:#e2b45d!important;z-index:5!important}.mobile-logout-item span{font-size:8px!important}}`;
+ extra.textContent=`@media(max-width:700px){.sidebar{display:flex!important;flex-direction:column!important}.nav-list{flex:1 1 auto!important;overflow-y:auto!important;min-height:0!important}.mobile-logout-item{width:100%!important;min-height:52px!important;padding:9px 3px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;position:sticky!important;bottom:0!important;margin-top:auto!important;background:#111820!important;border:1px solid rgba(216,162,62,.38)!important;border-radius:10px!important;color:#e2b45d!important;z-index:5!important;font-size:18px!important}.mobile-logout-item span{display:block!important;font-size:8px!important;line-height:1.1!important}}`;
  document.head.appendChild(extra);
 
  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Servelles service worker',err)))}
