@@ -1,0 +1,32 @@
+/* Servelle's mobile staff app */
+@media (max-width: 700px){
+  html,body{min-height:100%;overscroll-behavior-y:none}
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  .app-shell{display:block;min-height:100dvh;padding-bottom:78px}
+  .main{min-height:100dvh;padding:calc(16px + env(safe-area-inset-top)) 14px 22px;background-attachment:scroll!important}
+  .sidebar{display:flex!important;position:fixed;z-index:80;left:0;right:0;bottom:0;top:auto;height:calc(66px + env(safe-area-inset-bottom));padding:6px 8px env(safe-area-inset-bottom);border:0;border-top:1px solid var(--line);background:rgba(7,13,19,.97);backdrop-filter:blur(18px)}
+  .sidebar .brand-block,.sidebar .hotel-card{display:none!important}
+  .nav-list{width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+  .nav-item{min-width:0;padding:7px 2px;border-radius:10px;justify-content:center;flex-direction:column;gap:3px;font-size:18px;text-align:center}
+  .nav-item span{display:block!important;max-width:100%;font-size:9px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-item:nth-child(n+6){display:none}
+  .nav-badge{position:absolute;margin:0;top:2px;right:14%;min-width:17px;height:17px;font-size:9px}
+  .nav-item{position:relative}
+  .topbar{align-items:center;margin-bottom:22px}
+  .topbar .eyebrow{font-size:10px}.topbar h1{font-size:38px;margin:4px 0 6px}.date-line{font-size:11px}
+  .top-actions{gap:7px}.icon-btn,.profile{width:40px;height:40px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:none}
+  .status-card{min-height:150px;padding:17px 12px;border-radius:17px}
+  .status-card:first-child{grid-column:1/-1;min-height:170px}
+  .status-icon{font-size:21px;margin-bottom:12px}.status-title{font-size:10px}.status-count{font-size:50px;margin:3px 0}.status-sub{font-size:10px}.status-arrow{font-size:19px;margin-top:9px}
+  .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:none;padding:11px 6px;margin-top:12px;border-radius:14px}
+  .metrics-row>div{padding:7px 6px!important;text-align:center}.metrics-row span{font-size:8px}.metrics-row strong{font-size:15px}.metrics-row>.secondary-btn{grid-column:1/-1;margin-top:8px}
+  .section-head{align-items:center}.section-head h2{font-size:31px}.small-label{font-size:9px}
+  .request-card{padding:14px;border-radius:14px;gap:12px}.request-meta{gap:10px}.request-icon{width:43px;height:43px;font-size:20px}.request-copy h3{font-size:13px}.request-copy blockquote{font-size:13px}.request-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%}.request-actions .action-btn{min-height:42px}
+  .drawer{width:100vw;padding:calc(18px + env(safe-area-inset-top)) 16px calc(22px + env(safe-area-inset-bottom));border-left:0}
+  .modal{width:calc(100vw - 24px);max-height:86dvh;overflow:auto}
+  .department-grid{grid-template-columns:1fr 1fr;gap:10px}.department-card{padding:14px}.department-card strong{font-size:20px}.department-card .dept-count{font-size:30px}
+  .order-card{padding:15px;border-radius:15px}.order-actions>*{flex:1 1 45%;min-height:42px}
+  input,select,textarea,button{font-size:16px}
+}
+@media (display-mode: standalone) and (max-width:700px){body{user-select:none}.main{padding-top:calc(12px + env(safe-area-inset-top))}}
