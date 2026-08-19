@@ -13,7 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
-    private static final String HOME_URL = "https://servelles.co.uk/";
+    private static final String HOME_URL = "https://forge-compliance.github.io/ServellesProject/";
     private static final int FILE_CHOOSER = 101;
     private WebView webView;
     private ValueCallback<Uri[]> fileCallback;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         settings.setAllowContentAccess(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " ServellesAndroid/1.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " ServellesAndroid/1.1");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
