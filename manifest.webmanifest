@@ -1,0 +1,12 @@
+{
+  "name": "Servelle's Guest Services",
+  "short_name": "Servelle's",
+  "description": "Hotel guest services and operations platform",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080d12",
+  "theme_color": "#080d12",
+  "orientation": "any",
+  "categories": ["business", "productivity"]
+}
