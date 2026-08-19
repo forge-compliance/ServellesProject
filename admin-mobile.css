@@ -3,67 +3,32 @@
   #servellesAdminNav{
     display:grid!important;
     position:fixed!important;
-    left:0!important;
-    top:0!important;
-    bottom:0!important;
-    width:86px!important;
-    height:100dvh!important;
-    z-index:120!important;
-    padding:calc(16px + env(safe-area-inset-top)) 7px calc(12px + env(safe-area-inset-bottom))!important;
-    gap:4px!important;
-    align-content:start!important;
-    overflow-y:auto!important;
-    border-top:0!important;
-    border-right:1px solid rgba(255,255,255,.1)!important;
-    background:rgba(7,13,19,.98)!important;
-    backdrop-filter:blur(18px)!important;
+    left:0!important;top:0!important;bottom:0!important;
+    width:min(78vw,290px)!important;height:100dvh!important;
+    z-index:140!important;
+    padding:calc(18px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom))!important;
+    gap:5px!important;align-content:start!important;overflow-y:auto!important;
+    border-top:0!important;border-right:1px solid rgba(255,255,255,.1)!important;
+    background:rgba(7,13,19,.985)!important;backdrop-filter:blur(18px)!important;
+    transform:translateX(-102%)!important;transition:transform .22s ease!important;
+    box-shadow:18px 0 50px rgba(0,0,0,.45)!important;
   }
+  #servellesAdminNav.mobile-open{transform:translateX(0)!important}
   #servellesAdminNav button{
-    width:100%!important;
-    min-height:56px!important;
-    padding:7px 3px!important;
-    display:flex!important;
-    flex-direction:column!important;
-    justify-content:center!important;
-    align-items:center!important;
-    gap:4px!important;
-    text-align:center!important;
-    font-size:9px!important;
-    line-height:1.1!important;
-    white-space:normal!important;
+    width:100%!important;min-height:50px!important;padding:11px 12px!important;
+    display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;
+    gap:12px!important;text-align:left!important;font-size:14px!important;line-height:1.2!important;white-space:normal!important;
   }
-  #servellesAdminNav .nav-ico{
-    width:auto!important;
-    font-size:18px!important;
-    line-height:1!important;
-  }
+  #servellesAdminNav .nav-ico{width:24px!important;font-size:18px!important;line-height:1!important}
   #servellesAdminNav .admin-add-hotel{margin-top:8px!important}
-
-  .admin-topbar,
-  #adminOverview,
-  #adminManager{
-    margin-left:86px!important;
-    width:calc(100% - 86px)!important;
-    max-width:calc(100% - 86px)!important;
-    box-sizing:border-box!important;
-  }
-  .admin-topbar{
-    padding:calc(16px + env(safe-area-inset-top)) 14px 16px!important;
-    min-height:auto!important;
-  }
+  .admin-topbar,#adminOverview,#adminManager{margin-left:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+  .admin-topbar{padding:calc(16px + env(safe-area-inset-top)) 14px 16px!important;min-height:auto!important}
   .admin-title{font-size:34px!important;line-height:1!important}
   .admin-topbar>div:first-child{display:none!important}
-  .admin-actions{padding:6px 8px!important;gap:7px!important}
-  .admin-actions:before{display:none!important}
+  .admin-actions{padding:6px 8px!important;gap:7px!important}.admin-actions:before{display:none!important}
   .admin-user{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px!important}
   #adminOverview,#adminManager{padding:14px!important;overflow-x:hidden!important}
   .admin-panel,.manage-card,.platform-dashboard-card,.billing-card,.activity-card,.module-card,.settings-card{max-width:100%!important;overflow:hidden!important}
+  #adminShell.admin-nav-open::after{content:'';position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.42);backdrop-filter:blur(2px)}
 }
-@media (max-width:520px){
-  #servellesAdminNav{width:76px!important}
-  .admin-topbar,#adminOverview,#adminManager{margin-left:76px!important;width:calc(100% - 76px)!important;max-width:calc(100% - 76px)!important}
-  #servellesAdminNav button{font-size:8px!important;min-height:52px!important}
-  .admin-title{font-size:29px!important}
-  .admin-topbar{flex-direction:column!important;gap:10px!important}
-  .admin-actions{width:100%!important;justify-content:space-between!important}
-}
+@media (max-width:520px){.admin-title{font-size:29px!important}.admin-topbar{flex-direction:column!important;gap:10px!important}.admin-actions{width:100%!important;justify-content:space-between!important}}
