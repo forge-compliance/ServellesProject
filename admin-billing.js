@@ -14,7 +14,7 @@
     document.getElementById('adminManager')?.classList.add('hidden');
     const o=document.getElementById('adminOverview'); if(!o)return null; o.classList.remove('hidden','admin-hotels-only');
     o.querySelector('.admin-summary')?.style.setProperty('display','none');
-    o.querySelectorAll(':scope > .admin-panel,:scope > .platform-dashboard,:scope > .activity-page').forEach(x=>x.style.display='none');
+    o.querySelectorAll(':scope > .admin-panel,:scope > .platform-dashboard,:scope > .billing-page,:scope > .activity-page').forEach(x=>x.style.display='none');
     return o;
   }
   async function showBilling(){
@@ -32,4 +32,4 @@
   function wire(){const nav=document.getElementById('servellesAdminNav');if(!nav||nav.dataset.billingWired)return false;nav.dataset.billingWired='1';nav.addEventListener('click',e=>{const b=e.target.closest('[data-admin-page="billing"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();showBilling()},true);return true}
   new MutationObserver(wire).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',()=>{styles();wire()});window.showServellesBilling=showBilling;
 })();
-(function(){if(!document.querySelector('script[data-servelles-activity]')){const s=document.createElement('script');s.src='admin-activity.js?v=001';s.dataset.servellesActivity='1';document.head.appendChild(s)}})();
+(function(){if(!document.querySelector('script[data-servelles-activity]')){const s=document.createElement('script');s.src='admin-activity.js?v=002';s.dataset.servellesActivity='1';document.head.appendChild(s)}})();
