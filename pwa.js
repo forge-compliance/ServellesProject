@@ -9,22 +9,36 @@
  adminSwipe.dataset.adminMobileSwipe='1';
  document.head.appendChild(adminSwipe);
 
- function ensureMobileLogout(){
+ function tidyMobileNav(){
    if(window.innerWidth>700) return;
    const nav=document.querySelector('.app-shell .nav-list');
    const realLogout=document.getElementById('logoutBtn');
-   if(!nav||!realLogout||document.getElementById('mobileLogoutBtn')) return;
-   const btn=document.createElement('button');
-   btn.id='mobileLogoutBtn';
-   btn.className='nav-item mobile-logout-item';
-   btn.type='button';
-   btn.innerHTML='⇥ <span>Sign out</span>';
-   btn.addEventListener('click',()=>realLogout.click());
-   nav.appendChild(btn);
+   if(!nav||!realLogout) return;
+
+   const seen=new Set();
+   [...nav.querySelectorAll('.nav-item[data-nav]')].forEach(item=>{
+     const key=item.dataset.nav;
+     if(seen.has(key)) item.remove(); else seen.add(key);
+   });
+
+   let btn=document.getElementById('mobileLogoutBtn');
+   if(!btn){
+     btn=document.createElement('button');
+     btn.id='mobileLogoutBtn';
+     btn.className='nav-item mobile-logout-item';
+     btn.type='button';
+     btn.innerHTML='⇥ <span>Sign out</span>';
+     btn.addEventListener('click',()=>realLogout.click());
+     nav.appendChild(btn);
+   }
  }
- document.addEventListener('DOMContentLoaded',ensureMobileLogout);
- window.addEventListener('resize',ensureMobileLogout);
- new MutationObserver(ensureMobileLogout).observe(document.documentElement,{childList:true,subtree:true});
+ document.addEventListener('DOMContentLoaded',tidyMobileNav);
+ window.addEventListener('resize',tidyMobileNav);
+ new MutationObserver(tidyMobileNav).observe(document.documentElement,{childList:true,subtree:true});
+
+ const extra=document.createElement('style');
+ extra.textContent=`@media(max-width:700px){.sidebar{display:flex!important;flex-direction:column!important}.nav-list{flex:1 1 auto!important;overflow-y:auto!important;min-height:0!important}.mobile-logout-item{position:sticky!important;bottom:0!important;margin-top:auto!important;background:#111820!important;border:1px solid rgba(216,162,62,.38)!important;color:#e2b45d!important;z-index:5!important}.mobile-logout-item span{font-size:8px!important}}`;
+ document.head.appendChild(extra);
 
  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Servelles service worker',err)))}
  let deferred=null;
