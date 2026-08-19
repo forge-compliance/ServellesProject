@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
     private static final int FILE_CHOOSER = 101;
     private WebView webView;
     private ValueCallback<Uri[]> fileCallback;
+    private boolean authResetDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends Activity {
         settings.setAllowContentAccess(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " ServellesAndroid/1.1");
+        settings.setUserAgentString(settings.getUserAgentString() + " ServellesAndroid/1.2");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -44,6 +45,18 @@ public class MainActivity extends Activity {
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 } catch (ActivityNotFoundException ignored) {}
                 return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                if (!authResetDone && url != null && url.startsWith(HOME_URL)) {
+                    authResetDone = true;
+                    view.evaluateJavascript(
+                        "(function(){try{for(var i=localStorage.length-1;i>=0;i--){var k=localStorage.key(i);if(k&&k.indexOf('sb-')===0&&k.indexOf('-auth-token')>0)localStorage.removeItem(k);}location.reload();}catch(e){location.reload();}})();",
+                        null
+                    );
+                }
             }
         });
 
