@@ -9,7 +9,7 @@ on:
       - '.github/workflows/build-android-apk.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -38,9 +38,18 @@ jobs:
       - name: Rename APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk Servelles.apk
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: Servelles-Android-APK
           path: Servelles.apk
           if-no-files-found: error
+
+      - name: Publish Android release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete android-latest --cleanup-tag -y || true
+          gh release create android-latest Servelles.apk \
+            --title "Servelle's Android APK" \
+            --notes "Latest installable Android build of Servelle's Guest Services."
