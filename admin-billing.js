@@ -11,3 +11,14 @@
   function wire(){const nav=document.getElementById('servellesAdminNav');if(!nav||nav.dataset.billingWired)return false;nav.dataset.billingWired='1';nav.addEventListener('click',e=>{const b=e.target.closest('[data-admin-page="billing"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();showBilling()},true);return true}new MutationObserver(wire).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',()=>{styles();wire()});window.showServellesBilling=showBilling;
 })();
 (function(){[['admin-activity.js?v=003','servellesActivity'],['admin-integrations-reports.js?v=002','servellesIR'],['admin-settings.js?v=001','servellesSettings']].forEach(([src,key])=>{const attr='data-'+key.toLowerCase();if(!document.querySelector(`script[${attr}]`)){const s=document.createElement('script');s.src=src;s.setAttribute(attr,'1');document.head.appendChild(s)}})})();
+(function(){
+  const wireDepartmentButton=()=>{
+    const btn=document.getElementById('addDepartmentBtn');
+    if(!btn||btn.dataset.departmentWired==='1')return;
+    btn.dataset.departmentWired='1';
+    btn.addEventListener('click',()=>{if(typeof addDepartment==='function')addDepartment()});
+    document.getElementById('newDepartmentName')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(typeof addDepartment==='function')addDepartment()}});
+  };
+  new MutationObserver(wireDepartmentButton).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',wireDepartmentButton);
+})();
