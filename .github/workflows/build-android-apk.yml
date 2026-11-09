@@ -44,6 +44,7 @@ jobs:
           name: Servelles-Android-APK
           path: Servelles.apk
           if-no-files-found: error
+          retention-days: 3
 
       - name: Publish Android release
         env:
